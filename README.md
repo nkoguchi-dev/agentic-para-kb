@@ -37,6 +37,18 @@ agentic-para-kb/
 - `resources/`: 複数の project / area から再利用される参照情報。
 - `archives/`: 完了・非アクティブになった情報。agent は現在の文脈として使わない。
 
+## 完了・非アクティブ化時の蒸留
+
+project が完了した、または area が自分・チームの継続責任ではなくなった場合は、archive 前に再利用可能な知識を蒸留します。
+
+- 安定したルール・定義 → `_core/`
+- 横断的な意思決定 → `decisions/`
+- 再利用可能な参照情報 → `resources/`
+- 継続して残る責任領域 → `areas/`
+- 残りの終了済み project / area → `archives/`
+
+その後、MOC のリンクを更新し、`python3 tools/kb-tasks.py --write` と `python3 tools/check-links.py` を実行します。
+
 ## Quick Start
 
 1. このリポジトリをテンプレートとしてコピーする。
@@ -96,6 +108,18 @@ agentic-para-kb/
 - `areas/`: Ongoing responsibilities without a natural end date.
 - `resources/`: Reusable reference material.
 - `archives/`: Completed or inactive material. Agents should not use this as current context.
+
+## Closure And Distillation
+
+When a project is complete, or an area is no longer an ongoing responsibility for you or your team, distill reusable knowledge before archiving it.
+
+- Stable rules or definitions -> `_core/`
+- Cross-cutting decisions -> `decisions/`
+- Reusable references -> `resources/`
+- Ongoing responsibilities that remain active -> `areas/`
+- Remaining completed projects or inactive areas -> `archives/`
+
+Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 tools/check-links.py`.
 
 ## Quick Start
 

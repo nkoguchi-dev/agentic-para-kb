@@ -46,6 +46,16 @@
 
 未完アクションはステータスブロックの下に `- [ ]` で書きます。完了したアクションは、強い理由がない限り削除せず `- [x]` にします。
 
+## 完了・非アクティブ化時の蒸留
+
+project が完了した、または area が自分・チームの継続責任ではなくなった場合は、archive 前に再利用可能な知識を蒸留します。
+
+1. 対象 MOC の状態と最終更新日を更新する。
+2. 安定したルール・定義は `_core/`、横断的な意思決定は `decisions/`、再利用可能な参照情報は `resources/`、継続して残る責任領域は `areas/` へ移す。
+3. root MOC と関連 MOC のリンクを更新する。
+4. 終了済み project / 非アクティブ area を `archives/` へ移動する。
+5. タスク集約を再生成し、リンクチェックを実行する。
+
 ## 検証
 
 Markdown ファイルを追加・移動・編集した後は、次を実行します。
@@ -113,6 +123,16 @@ Use these states:
 - ⏸ Paused
 
 Unfinished actions should be written as `- [ ]` below the status block. Completed actions should become `- [x]` unless there is a strong reason to remove them.
+
+## Closure And Distillation
+
+When a project is complete, or an area is no longer an ongoing responsibility for you or your team, distill reusable knowledge before archiving it.
+
+1. Update the target MOC status and last-updated date.
+2. Move stable rules or definitions to `_core/`, cross-cutting decisions to `decisions/`, reusable references to `resources/`, and ongoing responsibilities that remain active to `areas/`.
+3. Update the root MOC and related MOC links.
+4. Move the completed project or inactive area to `archives/`.
+5. Regenerate the task index and run link checks.
 
 ## Validation
 

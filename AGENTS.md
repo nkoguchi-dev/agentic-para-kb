@@ -1,5 +1,73 @@
 # AGENTS.md
 
+このナレッジベースで作業する coding agent 向けのガイドライン。
+
+詳細仕様の正本は [`_core/00-09_index/00.01-kb-structure-rules.md`](./_core/00-09_index/00.01-kb-structure-rules.md) にあります。このファイルは薄い地図です。
+
+## リポジトリの目的
+
+このリポジトリは、agent-assisted work のための Markdown ナレッジベースです。PARA、decision records、MOC、検証スクリプトを組み合わせます。
+
+## 作業開始時
+
+新しいタスクを始めるときは、次の順で確認します。
+
+1. `_core/00-09_index/00.02-tasks.md` を読み、未完アクションを把握する。
+2. `_core/00-09_index/00.00-moc.md` を読み、関連する area または project を選ぶ。
+3. 現在のタスクに必要なリンク先だけを読む。
+
+## ディレクトリルール
+
+- `_core/`: 安定した定義、ルール、原則。
+- `decisions/`: 追記型の decision records。過去の決定を書き換えず、新しい決定を追加するか update を追記する。
+- `projects/`: 明確な完了条件がある取り組み。
+- `areas/`: 継続的な責任領域。
+- `resources/`: 再利用可能な参照情報。
+- `archives/`: 完了・非アクティブになった情報。現在の状態として検索・引用・依存しない。
+
+## ステータスブロック
+
+すべての project / area MOC には、次のブロックを置きます。
+
+```markdown
+## Status (Last updated: YYYY-MM-DD)
+
+| Task | State | Due |
+|---|---|---|
+| Example task | 🟡 In progress | YYYY-MM |
+```
+
+状態は次を使います。
+
+- 🔴 Not started
+- 🟡 In progress
+- 🟢 Done
+- ⏸ Paused
+
+未完アクションはステータスブロックの下に `- [ ]` で書きます。完了したアクションは、強い理由がない限り削除せず `- [x]` にします。
+
+## 検証
+
+Markdown ファイルを追加・移動・編集した後は、次を実行します。
+
+```sh
+python3 tools/check-links.py
+python3 tools/kb-tasks.py --write
+```
+
+`_core/00-09_index/00.02-tasks.md` は生成物です。手で編集しないでください。
+
+## 命名
+
+- ファイル名は lowercase kebab-case にする。
+- `_core/`、`projects/`、`areas/`、`resources/` では Johnny.Decimal 風の prefix を使う。
+- `decisions/` と `archives/` では Johnny.Decimal prefix を使わない。
+- MOC ファイルは `AC.00-*-moc.md` とする。
+
+---
+
+# AGENTS.md
+
 Guidelines for coding agents working in this knowledge base.
 
 Canonical details live in [`_core/00-09_index/00.01-kb-structure-rules.md`](./_core/00-09_index/00.01-kb-structure-rules.md). This file is a short map.

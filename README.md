@@ -49,6 +49,23 @@ project が完了した、または area が自分・チームの継続責任で
 
 その後、MOC のリンクを更新し、`python3 tools/kb-tasks.py --write` と `python3 tools/check-links.py` を実行します。
 
+## 大規模KB向けの任意パターン
+
+大規模な業務KBやチームKBでは、JD番号の枯渇を避けるためにドメインprefix付き番地を使ってもよいです。
+
+```text
+<domain>.AC.ID-name.md
+```
+
+例:
+
+- `dev.31.01-aws-account-structure.md`
+- `org.20.03-kb-lint-policy.md`
+- `hr.40.00-recruiting-index.md`
+- `sec.80.00-security-requirements-index.md`
+
+prefix は知識ドメイン、フォルダは PARA 上のライフサイクルを表します。prefix ごとに独立した番号空間を持ち、prefix/category の割当は root MOC の registry で管理します。
+
 ## Quick Start
 
 1. このリポジトリをテンプレートとしてコピーする。
@@ -120,6 +137,23 @@ When a project is complete, or an area is no longer an ongoing responsibility fo
 - Remaining completed projects or inactive areas -> `archives/`
 
 Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 tools/check-links.py`.
+
+## Optional Pattern For Larger Knowledge Bases
+
+For larger team or business knowledge bases, use domain-prefixed addresses to avoid exhausting Johnny.Decimal number ranges.
+
+```text
+<domain>.AC.ID-name.md
+```
+
+Examples:
+
+- `dev.31.01-aws-account-structure.md`
+- `org.20.03-kb-lint-policy.md`
+- `hr.40.00-recruiting-index.md`
+- `sec.80.00-security-requirements-index.md`
+
+The domain prefix represents a knowledge domain. The PARA folder represents lifecycle/state. Each domain prefix has an independent number space. Maintain prefix/category assignments in the root MOC registry.
 
 ## Quick Start
 

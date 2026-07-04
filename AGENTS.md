@@ -46,6 +46,16 @@
 
 未完アクションはステータスブロックの下に `- [ ]` で書きます。完了したアクションは、強い理由がない限り削除せず `- [x]` にします。
 
+## 会議メモとタスク取り込み
+
+会議メモは input record であり、タスクの正本ではありません。文字起こしや議事録からアクション・決定が出た場合、対象 project / area の文脈を読み込んでいないセッションでは、対象を直接編集しないでください。
+
+1. 議事録にはアクション・決定を記録する。
+2. 追跡すべき作業は、会議を所有する project / area の MOC に「反映TODO」として `- [ ]` で置く。
+3. 反映TODOは「Reflect <action/decision> into <target project/area> after reading its current context」のように、対象と前提を明示する。
+4. 後続セッションが対象 project / area を読み込み、適切な場所・粒度で反映する。
+5. 議事録本文では原則 `- [ ]` を使わず、表や番号リストで記録する。例外的に議事録自体をタスクソースにする場合だけ `<!-- kb-tasks:include -->` を使う。
+
 ## 完了・非アクティブ化時の蒸留
 
 project が完了した、または area が自分・チームの継続責任ではなくなった場合は、archive 前に再利用可能な知識を蒸留します。
@@ -123,6 +133,16 @@ Use these states:
 - ⏸ Paused
 
 Unfinished actions should be written as `- [ ]` below the status block. Completed actions should become `- [x]` unless there is a strong reason to remove them.
+
+## Meeting Notes And Task Intake
+
+Meeting notes are input records, not task sources of truth. When actions or decisions appear in a transcript or meeting note, do not directly edit a target project or area unless the session has loaded and understood that target context.
+
+1. Record actions and decisions in the meeting note.
+2. Put trackable work in the meeting-owning project or area MOC as an intake TODO using `- [ ]`.
+3. Write intake TODOs as “Reflect <action/decision> into <target project/area> after reading its current context” so the target and prerequisite are explicit.
+4. A later session should read the target project or area and reflect the work at the right place and granularity.
+5. Avoid `- [ ]` checkboxes in meeting notes by default; use tables or numbered lists instead. Use `<!-- kb-tasks:include -->` only when the meeting note itself is intentionally a task source.
 
 ## Closure And Distillation
 

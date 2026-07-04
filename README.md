@@ -49,6 +49,15 @@ project が完了した、または area が自分・チームの継続責任で
 
 その後、MOC のリンクを更新し、`python3 tools/kb-tasks.py --write` と `python3 tools/check-links.py` を実行します。
 
+## 会議メモとタスク取り込み
+
+会議メモは input record であり、タスクの正本ではありません。文字起こしや議事録からアクション・決定が出た場合、対象 project / area の文脈を読み込んでいないセッションでは、対象を直接編集しません。
+
+- 議事録にはアクション・決定を記録する。
+- 追跡すべき作業は、会議を所有する project / area の MOC に「反映TODO」として置く。
+- 後続セッションが対象 project / area を読み込み、適切な場所・粒度で反映する。
+- 議事録本文では原則 `- [ ]` を使わず、表や番号リストで記録する。
+
 ## 大規模KB向けの任意パターン
 
 大規模な業務KBやチームKBでは、JD番号の枯渇を避けるためにドメインprefix付き番地を使ってもよいです。
@@ -137,6 +146,15 @@ When a project is complete, or an area is no longer an ongoing responsibility fo
 - Remaining completed projects or inactive areas -> `archives/`
 
 Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 tools/check-links.py`.
+
+## Meeting Notes And Task Intake
+
+Meeting notes are input records, not task sources of truth. When actions or decisions appear in a transcript or meeting note, do not directly edit a target project or area unless the session has loaded and understood that target context.
+
+- Record actions and decisions in the meeting note.
+- Put trackable work in the meeting-owning project or area MOC as an intake TODO.
+- A later session should read the target project or area and reflect the work at the right place and granularity.
+- Avoid `- [ ]` checkboxes in meeting notes by default; use tables or numbered lists instead.
 
 ## Optional Pattern For Larger Knowledge Bases
 

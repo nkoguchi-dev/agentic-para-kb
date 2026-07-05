@@ -1,0 +1,6 @@
+[project]
+name = "agentic-para-kb-tools"
+version = "0.1.0"
+description = "Validation and maintenance tools for agentic-para-kb"
+requires-python = ">=3.10"
+dependencies = []

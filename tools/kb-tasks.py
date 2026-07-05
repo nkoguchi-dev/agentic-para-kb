@@ -58,6 +58,11 @@ def extract_tasks(path: Path) -> tuple[list[tuple[int, str]], str | None]:
     return tasks, match.group(1) if match else None
 
 
+def is_project_or_area_moc(path: Path) -> bool:
+    rel = path.relative_to(REPO_ROOT)
+    return rel.parts[0] in {"projects", "areas"} and path.name.endswith("-moc.md")
+
+
 def output_relative_link(path: Path) -> str:
     return Path(os.path.relpath(path, OUTPUT.parent)).as_posix()
 
@@ -75,7 +80,7 @@ def generate(write: bool = False) -> str:
 
     for path in scan_files(REPO_ROOT):
         tasks, last_updated = extract_tasks(path)
-        if not tasks:
+        if not tasks and not is_project_or_area_moc(path):
             continue
         rel = path.relative_to(REPO_ROOT)
         href = output_relative_link(path)

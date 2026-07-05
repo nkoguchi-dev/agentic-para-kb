@@ -77,6 +77,8 @@ python3 tools/kb-tasks.py --write
 
 `_core/00-09_index/00.02-tasks.md` は生成物です。手で編集しないでください。
 
+検証済みのまとまりになったら、こまめにコミットしてください。未コミットの変更を残して作業を終える場合は、理由と残っている変更を明示してください。
+
 ## 命名
 
 - ファイル名は lowercase kebab-case にする。
@@ -164,6 +166,8 @@ python3 tools/kb-tasks.py --write
 ```
 
 `_core/00-09_index/00.02-tasks.md` is generated. Do not edit it manually.
+
+Commit frequently once a verified change is coherent. If you end work with uncommitted changes, state why and list what remains.
 
 ## Naming
 

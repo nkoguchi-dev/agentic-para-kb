@@ -86,6 +86,14 @@ python3 tools/kb-tasks.py --write
 - `decisions/` と `archives/` では Johnny.Decimal prefix を使わない。
 - MOC ファイルは `AC.00-*-moc.md` とする。
 
+topic-scoped numbering を採用する場合:
+
+- 新しい project は原則として既存の主題帯を使い、一時的な取り組みごとに新しい番号帯を割り当てない。
+- カテゴリは一時的な project ではなく、複数の取り組みで長期間使う安定した主題に割り当てる。
+- 個別の調査・設計・手順は、既存カテゴリ内の `.01`〜`.99` を使って増やす。
+- 新しい10単位の番号帯は、既存主題に分類できない長期的な責任領域に限って割り当てる。
+- `70-99` の未使用帯を使い切り、さらに新しい帯が必要になった時点で3桁カテゴリを許可する拡張ルールを追加する。それまでは3桁番号を使用しない。
+
 ---
 
 # AGENTS.md
@@ -175,3 +183,11 @@ Commit frequently once a verified change is coherent. If you end work with uncom
 - Use Johnny.Decimal-style prefixes in `_core/`, `projects/`, `areas/`, and `resources`.
 - Do not use Johnny.Decimal prefixes in `decisions/` or `archives/`.
 - MOC files use `AC.00-*-moc.md`.
+
+When using topic-scoped numbering:
+
+- New projects should use an existing topic range by default; do not allocate a new range for each temporary initiative.
+- Allocate categories to stable, long-lived topics that can serve multiple initiatives, not to temporary projects.
+- Add individual research notes, designs, and procedures as `.01` through `.99` within an existing category.
+- Allocate a new ten-number range only to a long-lived responsibility that does not fit an existing topic.
+- After exhausting the unused `70-99` ranges and needing another range, add an explicit extension rule that permits three-digit categories. Do not use three-digit numbers before then.

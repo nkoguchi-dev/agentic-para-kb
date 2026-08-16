@@ -46,6 +46,8 @@
 
 未完アクションはステータスブロックの下に `- [ ]` で書きます。完了したアクションは、強い理由がない限り削除せず `- [x]` にします。
 
+TODO 1行では背景、完了条件、依存関係、調査記録が不足する場合、所有するareaまたはproject配下にアクションサポートノートを作り、チェックボックス直下から`Details`リンクを張ります。状態、期限、次のアクションはMOCに保ち、サポートノート内では未完チェックボックスを使いません。
+
 ## 会議メモとタスク取り込み
 
 会議メモは input record であり、タスクの正本ではありません。文字起こしや議事録からアクション・決定が出た場合、対象 project / area の文脈を読み込んでいないセッションでは、対象を直接編集しないでください。
@@ -143,6 +145,8 @@ Use these states:
 - ⏸ Paused
 
 Unfinished actions should be written as `- [ ]` below the status block. Completed actions should become `- [x]` unless there is a strong reason to remove them.
+
+When a one-line TODO lacks enough background, completion criteria, dependencies, or research history, create an action support note under the owning area or project and add an indented `Details` link below the checkbox. Keep state, due dates, and next actions in the MOC, and do not use open checkboxes in the support note.
 
 ## Meeting Notes And Task Intake
 

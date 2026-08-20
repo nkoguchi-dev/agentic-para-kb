@@ -41,6 +41,8 @@ agentic-para-kb/
 
 project が完了した、または area が自分・チームの継続責任ではなくなった場合は、archive 前に再利用可能な知識を蒸留します。
 
+継続中の project でも、残る作業から独立して完了判定できる作業単位には同じ蒸留手順を適用します。再利用可能な知識と継続する未完タスクを現役ファイルへ移し、固有の経緯を archive したうえで、MOCを現在地と次のアクションに絞ります。
+
 - 安定したルール・定義 → `_core/`
 - 横断的な意思決定 → `decisions/`
 - 再利用可能な参照情報 → `resources/`
@@ -138,6 +140,8 @@ agentic-para-kb/
 ## Closure And Distillation
 
 When a project is complete, or an area is no longer an ongoing responsibility for you or your team, distill reusable knowledge before archiving it.
+
+Apply the same workflow to a work unit within an ongoing project when its completion can be determined independently from the remaining work. Move reusable knowledge and continuing open actions into active files, archive work-unit-specific history, and keep the MOC focused on current state and next actions.
 
 - Stable rules or definitions -> `_core/`
 - Cross-cutting decisions -> `decisions/`

@@ -62,6 +62,8 @@ TODO 1行では背景、完了条件、依存関係、調査記録が不足す�
 
 project が完了した、または area が自分・チームの継続責任ではなくなった場合は、archive 前に再利用可能な知識を蒸留します。
 
+継続中の project でも、残る作業から独立して完了判定できる作業単位は部分完了として蒸留します。再利用可能な知識と継続する未完タスクを現役ファイルへ移し、固有の経緯を `archives/` へ移したうえで、MOCから完了状態・完了タスク・リンクを外します。MOCは完了履歴ではなく、現在地と次のアクションの地図として薄く保ちます。
+
 1. 対象 MOC の状態と最終更新日を更新する。
 2. 安定したルール・定義は `_core/`、横断的な意思決定は `decisions/`、再利用可能な参照情報は `resources/`、継続して残る責任領域は `areas/` へ移す。
 3. root MOC と関連 MOC のリンクを更新する。
@@ -161,6 +163,8 @@ Meeting notes are input records, not task sources of truth. When actions or deci
 ## Closure And Distillation
 
 When a project is complete, or an area is no longer an ongoing responsibility for you or your team, distill reusable knowledge before archiving it.
+
+Within an ongoing project, treat a work unit whose completion can be determined independently from the remaining work as a partial closure. Move reusable knowledge and continuing open actions into active files, move work-unit-specific history to `archives/`, and remove completed state, completed actions, and links from the MOC. Keep the MOC thin as a map of current state and next actions, not as a completed-history log.
 
 1. Update the target MOC status and last-updated date.
 2. Move stable rules or definitions to `_core/`, cross-cutting decisions to `decisions/`, reusable references to `resources/`, and ongoing responsibilities that remain active to `areas/`.

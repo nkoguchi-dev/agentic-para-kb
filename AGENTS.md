@@ -44,7 +44,7 @@
 - 🟢 Done
 - ⏸ Paused
 
-未完アクションはステータスブロックの下に `- [ ]` で書きます。完了したアクションは、強い理由がない限り削除せず `- [x]` にします。
+未完アクションはステータスブロックの下に `- [ ]` で書きます。完了したアクションは削除せず `- [x]` にします。ただし**そのまま置き続けないでください**——完了エントリは、放置すると MOC の主成分になります（下記「完了ログを索引に畳む」）。
 
 TODO 1行では背景、完了条件、依存関係、調査記録が不足する場合、所有するareaまたはproject配下にアクションサポートノートを作り、チェックボックス直下から`Details`リンクを張ります。状態、期限、次のアクションはMOCに保ち、サポートノート内では未完チェックボックスを使いません。
 
@@ -73,6 +73,23 @@ project が完了した、または area が自分・チームの継続責任で
 3. root MOC と関連 MOC のリンクを更新する。
 4. 終了済み project / 非アクティブ area を `archives/` へ移動する。
 5. タスク集約を再生成し、リンクチェックを実行する。
+
+## 完了ログを索引に畳む
+
+**完了した `- [x]` は、中身が他所に実在するなら「何を・いつ・どこへ」の 1 行に畳みます。** 節の見出しは「完了の記録 — 移送先の索引」のように、索引であることが分かる名前にしてください。
+
+⚠️ **これを怠ると MOC の主成分が「もう終わったこと」になります。** 運用中の実 KB で測ったところ、完了 **193 件・88,217 字**に対して未完は **334 件・32,543 字**でした（**完了が未完の 2.7 倍**）。件数では未完のほうが多いのに総量が逆転するのは 1 件あたりの長さが違うためで、完了 424 字／未完 97 字。**完了した瞬間に「なぜそう決めたか」が書き足されて肥大する**構造になっています。
+
+畳めるかの判定は 2 段構えです。
+
+1. **識別子・コード・数値を集合として抜き、KB 全体と関連リポジトリに存在するかを突き合わせる。** ⚠️ **照合先を同じ area に限ると誤検知が出ます**（実測で「欠落」が 46 件 → KB 全体とリポジトリまで広げて 6 件、うち実質の欠落は 0）。
+2. **散文の決定はトークンに掛かりません。** 本文を読んで移送先を確かめてください。
+
+- ⛔ **畳む前に、そのエントリが前提にしている決定が今も生きているかを確かめること。** **エントリ自身が「状態の正本は◯◯」と書いていたら、必ずそこを読みます。** 実測で、**前提が 25 日前に覆っていた**のに気づかず「移送先が無いので畳めない」と誤判定しました。**索引化はエントリの棚卸しを兼ねます。**
+- **移送先に無い固有分は、落とす前に該当ファイルへ上げる。** ⭐ 上げたことで別の作業が楽になることがあります（実例＝完了ログに埋もれていた配布ミラーのページ ID を各ページの「一次情報の所在」へ上げたところ、それまで名前でしか指されておらず同期のたびに探し直していたものが引けるようになった）。
+- **落とすのは重複だけで、要約はしません。** **「やらないと決めた」ものも、その決定が他所にあるなら畳めます**——取り下げだから畳めない、ではありません。
+- **トリガはその MOC を次に触ったとき。** ⛔ **量の閾値は置かないでください。** 量では「畳んではいけないもの」と区別できません——**畳まない判断は個別の事情によるので、その MOC 自身に理由を書きます**（機械検査に例外リストを持たせない）。
+- ⚠️ **触ったときだけでは、触られない場所へ永遠に届きません。** 定期的に棚卸しの場を設けて対にしてください。**捨ててよいかの判断は自動化できない**ので、人が判断する場が要ります。
 
 ## 検証
 
@@ -167,7 +184,7 @@ Use these states:
 - 🟢 Done
 - ⏸ Paused
 
-Unfinished actions should be written as `- [ ]` below the status block. Completed actions should become `- [x]` unless there is a strong reason to remove them.
+Unfinished actions should be written as `- [ ]` below the status block. Completed actions should become `- [x]` rather than being deleted. But **do not leave them sitting there** — completed entries become the bulk of a MOC if nothing folds them (see "Folding Completed Logs Into An Index").
 
 When a one-line TODO lacks enough background, completion criteria, dependencies, or research history, create an action support note under the owning area or project and add an indented `Details` link below the checkbox. Keep state, due dates, and next actions in the MOC, and do not use open checkboxes in the support note.
 
@@ -196,6 +213,23 @@ Within an ongoing project, treat a work unit whose completion can be determined 
 3. Update the root MOC and related MOC links.
 4. Move the completed project or inactive area to `archives/`.
 5. Regenerate the task index and run link checks.
+
+## Folding Completed Logs Into An Index
+
+**Fold a completed `- [x]` into a single "what / when / where it went" line once its content exists elsewhere.** Name the section so it reads as an index, e.g. "Completed — index of where it went".
+
+⚠️ **Skip this and completed work becomes the bulk of the MOC.** Measured on a real KB in daily use: **193 completed entries totalling 88,217 characters** against **334 open ones totalling 32,543** — completed work was **2.7x the volume of open work**. There were more open items by count, so the inversion comes from length: 424 characters per completed entry against 97 per open one. **The moment something completes, the reasoning behind it gets appended**, and that is what grows.
+
+Deciding whether an entry can be folded takes two passes.
+
+1. **Extract identifiers, code symbols and numbers as a set, and check them against the whole KB plus any related repositories.** ⚠️ **Restricting the comparison to the same area produces false positives** (measured: 46 apparent losses shrank to 6 once the whole KB and the repositories were included, of which none were real).
+2. **Prose decisions do not appear as tokens.** Read the body and confirm the destination by hand.
+
+- ⛔ **Before folding, check that the decision the entry depends on is still current.** **If the entry itself says "the source of truth for this state is X", go read X.** Measured failure: a premise had been reversed 25 days earlier, and the entry was misjudged as unfoldable "because there is no destination". **Folding an index doubles as an audit of its entries.**
+- **Anything unique that has no destination must be lifted into the relevant page before it is dropped.** ⭐ Sometimes lifting it makes another job easier — in one case the page IDs of published mirrors were buried in the completed log; they had only ever been referred to by title, so every sync had to hunt for them again.
+- **Drop duplication only; do not summarize.** **Something decided against can be folded too**, as long as the decision lives elsewhere — "it was abandoned" is not a reason it cannot be folded.
+- **Trigger folding the next time you touch that MOC.** ⛔ **Do not set a size threshold.** Size cannot distinguish what must not be folded — **that judgment is case-specific, so record the reason in the MOC itself** rather than maintaining an exception list inside a checker.
+- ⚠️ **A touch-based trigger never reaches documents nobody touches.** Pair it with a periodic review. **Deciding what is safe to discard cannot be automated**, so the review needs a human in it.
 
 ## Validation
 

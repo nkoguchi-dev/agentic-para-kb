@@ -51,6 +51,14 @@ project が完了した、または area が自分・チームの継続責任で
 
 その後、MOC のリンクを更新し、`python3 tools/kb-tasks.py --write` と `python3 tools/check-links.py` を実行します。
 
+## 完了ログを索引に畳む
+
+蒸留は project の終わりに 1 度やるものですが、**完了した `- [x]` は動いているあいだにも溜まります。** 中身が他所に実在するなら「何を・いつ・どこへ」の 1 行へ畳んでください。
+
+⚠️ 放置すると MOC の主成分が「もう終わったこと」になります。運用中の実 KB では、完了 193 件・88,217 字に対して未完は 334 件・32,543 字でした（**完了が未完の 2.7 倍**）。**完了した瞬間に「なぜそう決めたか」が書き足される**のが原因です。
+
+判定は 2 段構え（識別子の照合 → 散文の決定は本文を読む）で、⛔ **畳む前に前提が今も生きているかを確かめます**。手順と落とし穴は `AGENTS.md` の「完了ログを索引に畳む」節にあります。
+
 ## 会議メモとタスク取り込み
 
 会議メモは input record であり、タスクの正本ではありません。**アクション・決定は、議事録を作ったのと同じセッションで宛先まで書き切ります。** ただし読まずに書かないこと。
@@ -160,6 +168,14 @@ Apply the same workflow to a work unit within an ongoing project when its comple
 - Remaining completed projects or inactive areas -> `archives/`
 
 Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 tools/check-links.py`.
+
+## Folding Completed Logs Into An Index
+
+Distillation happens once, at closure. **Completed `- [x]` entries pile up while the work is still running.** Fold each into a single "what / when / where it went" line once its content exists elsewhere.
+
+⚠️ Left alone, finished work becomes the bulk of the MOC. Measured on a real KB in daily use: 193 completed entries totalling 88,217 characters against 334 open ones totalling 32,543 — **completed work was 2.7x the volume of open work**. The cause is that **the reasoning gets appended the moment something completes**.
+
+Deciding takes two passes (token comparison, then reading the body for prose decisions), and ⛔ **check that the entry's premise is still current before folding**. The procedure and its pitfalls are in the "Folding Completed Logs Into An Index" section of `AGENTS.md`.
 
 ## Meeting Notes And Task Intake
 

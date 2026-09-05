@@ -48,6 +48,14 @@
 
 TODO 1行では背景、完了条件、依存関係、調査記録が不足する場合、所有するareaまたはproject配下にアクションサポートノートを作り、チェックボックス直下から`Details`リンクを張ります。状態、期限、次のアクションはMOCに保ち、サポートノート内では未完チェックボックスを使いません。
 
+**既に段落化している古い起票行は、一括では畳みません**——次にその項目を触るときにノートへ剥がします。⭐ **例外は「1 つの節が MOC 全体の 3 割を超えたとき」。** そこまで育つと、次に触るのを待つ流儀では追いつきません（実測＝784 行・112,015 字まで育った MOC で、1 節が 44,580 字＝全体の 40% を占めていた。5 つの塊をノートへ移して 553 行・51,452 字へ戻した）。
+
+**一括で畳むときは、欠落していないことを機械的に確かめてから畳みます。** 手順は「完了ログを索引に畳む」と同じ 2 段構えで、(1) 畳む前の本文から識別子・コード・数値を集合として抜く (2) 移設後の全ファイルを連結した文字列に対し、その集合が全件現れることを確かめる (3) 現れないものだけを人が読み、同義の言い換えか本当の欠落かを判定する。
+
+- ⚠️ **強調句の字面一致では判定できません。** 受け皿のノートが同じ事実をより詳しい別の言い回しで書いていることが多く、実測では強調句 153 個中 105 個が字面一致しませんでしたが**欠落は 0** でした（識別子側は 533 種で欠落 0）。
+- ⛔ **受け皿のノートが既にあるときは新しく作らないでください**（同じ話の置き場が分かれます）。既存ノートに無い事実だけを該当節へ足し、重複していた分を落とします。
+- **落とすのは重複だけで、要約はしません。**
+
 ## 会議メモとタスク取り込み
 
 会議メモは input record であり、タスクの正本ではありません。**アクション・決定は、議事録を作ったのと同じセッションで宛先まで書き切ります。** ただし**読まずに書かないこと**——宛先へ書くには、その既存記述・粒度・重複を把握したうえで、適切な場所に適切な粒度で書き込む必要があります。
@@ -77,6 +85,8 @@ project が完了した、または area が自分・チームの継続責任で
 ## 完了ログを索引に畳む
 
 **完了した `- [x]` は、中身が他所に実在するなら「何を・いつ・どこへ」の 1 行に畳みます。** 節の見出しは「完了の記録 — 移送先の索引」のように、索引であることが分かる名前にしてください。
+
+⛔ **畳むときに issue の状態・完了日・PR 番号は落とします。** それらは issue tracker と git が持っている情報で、MOC が二重に持つと必ず古くなります。`ISSUE-810 完了（2026-08-27・PR #821）` ではなく、**何を決めたか・現在の実装事実**を残してください。⚠️ **完了ログ節はリンクチェッカから見えません**（エントリは `- [x]` 行か引用ブロックで、多くの検査が両方を対象外にしている）ので、**ここは手順だけが防壁です。**
 
 ⚠️ **これを怠ると MOC の主成分が「もう終わったこと」になります。** 運用中の実 KB で測ったところ、完了 **193 件・88,217 字**に対して未完は **334 件・32,543 字**でした（**完了が未完の 2.7 倍**）。件数では未完のほうが多いのに総量が逆転するのは 1 件あたりの長さが違うためで、完了 424 字／未完 97 字。**完了した瞬間に「なぜそう決めたか」が書き足されて肥大する**構造になっています。
 
@@ -188,6 +198,14 @@ Unfinished actions should be written as `- [ ]` below the status block. Complete
 
 When a one-line TODO lacks enough background, completion criteria, dependencies, or research history, create an action support note under the owning area or project and add an indented `Details` link below the checkbox. Keep state, due dates, and next actions in the MOC, and do not use open checkboxes in the support note.
 
+**Do not convert old task lines that have already grown into paragraphs in bulk** — peel each one into a note the next time you touch it. ⭐ **The exception is when a single section exceeds about a third of the whole MOC.** Past that point, waiting until someone touches it never catches up (measured: a MOC had grown to 784 lines / 112,015 characters with one section accounting for 44,580 of them, 40% of the file; moving five blocks into notes brought it back to 553 lines / 51,452 characters).
+
+**When you do convert in bulk, verify mechanically that nothing was lost before dropping anything.** The procedure is the same two-pass check as "Folding Completed Logs Into An Index": extract identifiers, code symbols and numbers from the text as a set; concatenate every file the content moved into and confirm the whole set appears; then read only the items that do not appear and decide whether each is a paraphrase or a real loss.
+
+- ⚠️ **Matching emphasized phrases verbatim does not work as a check.** The receiving note usually states the same fact in fuller, different words: in one measurement 105 of 153 emphasized phrases had no literal match, yet **nothing had been lost** (the identifier set, 533 of them, matched completely).
+- ⛔ **If a receiving note already exists, do not create another one** — it splits the same subject across two places. Add only the facts the existing note lacks, and drop what was duplicated.
+- **Drop duplication only; do not summarize.**
+
 ## Meeting Notes And Task Intake
 
 Meeting notes are input records, not task sources of truth. **Reflect actions and decisions into their targets in the same session that writes the meeting note.** But do not write blind: reaching the right place at the right granularity requires knowing what the target already says.
@@ -217,6 +235,8 @@ Within an ongoing project, treat a work unit whose completion can be determined 
 ## Folding Completed Logs Into An Index
 
 **Fold a completed `- [x]` into a single "what / when / where it went" line once its content exists elsewhere.** Name the section so it reads as an index, e.g. "Completed — index of where it went".
+
+⛔ **Drop issue state, completion dates and PR numbers as you fold.** The issue tracker and git already hold them, and a second copy in the MOC will go stale. Write **what was decided and what is true of the implementation now**, not `ISSUE-810 done (2026-08-27, PR #821)`. ⚠️ **Completed-log sections are invisible to link checkers** — their entries are `- [x]` lines or quote blocks, which most checks exclude — so **procedure is the only guard here.**
 
 ⚠️ **Skip this and completed work becomes the bulk of the MOC.** Measured on a real KB in daily use: **193 completed entries totalling 88,217 characters** against **334 open ones totalling 32,543** — completed work was **2.7x the volume of open work**. There were more open items by count, so the inversion comes from length: 424 characters per completed entry against 97 per open one. **The moment something completes, the reasoning behind it gets appended**, and that is what grows.
 

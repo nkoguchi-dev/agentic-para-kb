@@ -106,9 +106,16 @@ project が完了した、または area が自分・チームの継続責任で
 Markdown ファイルを追加・移動・編集した後は、次を実行します。
 
 ```sh
-python3 tools/check-links.py
+python3 tools/kb-lint.py            # 全走査
+python3 tools/kb-lint.py <path>...  # 触ったファイルだけ
 python3 tools/kb-tasks.py --write
 ```
+
+**エラーはコミットを止め、警告は止めません。** 日付の遅れや未使用の定義でコミットを止めると、`KB_LINT_SKIP` のような回避が常用され、**止めるべきルールごと無効化されます**。CI で厳しく見たいときは `--strict` で警告もエラー扱いにできます。
+
+⚠️ **`index-stale-date` は `--staged` と明示パス指定のときだけ判定します**（全走査で出すと、触っていないファイルの分まで毎回並んでノイズになるため）。pre-commit hook は `--staged` で呼びます。
+
+**検査の一覧は別に持ちません。** 指摘そのものに「なぜ駄目か」を書いてあるので、出た文面を読めば足ります（一覧を別に作ると必ず実装とずれます）。
 
 `_core/00-09_index/00.02-tasks.md` は生成物です。手で編集しないでください。
 
@@ -135,6 +142,7 @@ python3 tools/kb-tasks.py --write
 
 - ファイル名は lowercase kebab-case にする。
 - `_core/`、`projects/`、`areas/`、`resources/` では Johnny.Decimal 風の prefix を使う。
+- **番号空間はリポジトリ全体で 1 つ**。同じ番地を 2 つのファイルが持たないこと（`addr-duplicate` がエラーで止めます）。⚠️ **バケツごとに独立させないでください**——ファイルは project から area や `archives/` へ移動するので、バケツ別に採番すると移動した瞬間に衝突します。番号帯が足りなくなったときの逃げ道が、README の「ドメインprefix付き番地」です。
 - `decisions/` と `archives/` では Johnny.Decimal prefix を使わない。
 - MOC ファイルは `AC.00-*-moc.md` とする。
 
@@ -256,9 +264,16 @@ Deciding whether an entry can be folded takes two passes.
 After adding, moving, or editing Markdown files:
 
 ```sh
-python3 tools/check-links.py
+python3 tools/kb-lint.py            # whole repository
+python3 tools/kb-lint.py <path>...  # only the files you touched
 python3 tools/kb-tasks.py --write
 ```
+
+**Errors block a commit; warnings do not.** Gating on a late date or an unused definition teaches people to set something like `KB_LINT_SKIP`, which turns off every rule including the ones worth keeping. Use `--strict` in CI to treat warnings as errors.
+
+⚠️ **`index-stale-date` only runs with `--staged` or explicit paths.** On a whole-repo run it would list every file nobody touched, every time. The pre-commit hook calls it with `--staged`.
+
+**There is no separate list of checks.** Each finding explains why it is a problem, so reading the output is enough — a list kept elsewhere would drift from the implementation.
 
 `_core/00-09_index/00.02-tasks.md` is generated. Do not edit it manually.
 
@@ -285,6 +300,7 @@ If you only ever run one session, this section is optional. **But once you adopt
 
 - Use lowercase kebab-case filenames.
 - Use Johnny.Decimal-style prefixes in `_core/`, `projects/`, `areas/`, and `resources`.
+- **One number space for the whole repository.** No two files share an address (`addr-duplicate` blocks the commit). ⚠️ **Do not give each bucket its own space** — files move from a project into an area or into `archives/`, so per-bucket numbering collides the moment something moves. Running out of ranges is what the domain-prefixed addressing in the README is for.
 - Do not use Johnny.Decimal prefixes in `decisions/` or `archives/`.
 - MOC files use `AC.00-*-moc.md`.
 

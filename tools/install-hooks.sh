@@ -13,7 +13,7 @@ cat > "$hook_path" <<'HOOK'
 #!/usr/bin/env sh
 set -eu
 
-python3 tools/check-links.py
+python3 tools/kb-lint.py --staged
 python3 tools/kb-tasks.py --write
 
 if ! git diff --quiet -- _core/00-09_index/00.02-tasks.md; then

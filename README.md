@@ -49,7 +49,7 @@ project が完了した、または area が自分・チームの継続責任で
 - 継続して残る責任領域 → `areas/`
 - 残りの終了済み project / area → `archives/`
 
-その後、MOC のリンクを更新し、`python3 tools/kb-tasks.py --write` と `python3 tools/check-links.py` を実行します。
+その後、MOC のリンクを更新し、`python3 tools/kb-tasks.py --write` と `python3 tools/kb-lint.py` を実行します。
 
 ## 完了ログを索引に畳む
 
@@ -100,7 +100,7 @@ prefix は知識ドメイン、フォルダは PARA 上のライフサイクル�
 1. このリポジトリをテンプレートとしてコピーする。
 2. example project、area、resource を自分の内容に置き換える。
 3. `_core/10-19_domain/10.01-principles-template.md` を更新する。
-4. `python3 tools/check-links.py` を実行する。
+4. `python3 tools/kb-lint.py` を実行する。
 5. `python3 tools/kb-tasks.py --write` を実行する。
 6. 必要なら `bash tools/install-hooks.sh` で pre-commit hook を入れる。
 
@@ -173,7 +173,7 @@ Apply the same workflow to a work unit within an ongoing project when its comple
 - Ongoing responsibilities that remain active -> `areas/`
 - Remaining completed projects or inactive areas -> `archives/`
 
-Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 tools/check-links.py`.
+Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 tools/kb-lint.py`.
 
 ## Folding Completed Logs Into An Index
 
@@ -224,7 +224,7 @@ If you run several agent sessions at once, edit in a git worktree and never edit
 1. Copy this repository as a template.
 2. Replace the example project, area, and resource files.
 3. Update `_core/10-19_domain/10.01-principles-template.md`.
-4. Run `python3 tools/check-links.py`.
+4. Run `python3 tools/kb-lint.py`.
 5. Run `python3 tools/kb-tasks.py --write`.
 6. Optionally install the pre-commit hook with `bash tools/install-hooks.sh`.
 

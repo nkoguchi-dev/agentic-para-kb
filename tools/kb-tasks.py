@@ -69,7 +69,7 @@ def output_relative_link(path: Path) -> str:
 
 def check_output_links() -> None:
     subprocess.run(
-        [sys.executable, str(REPO_ROOT / "tools" / "check-links.py"), str(OUTPUT)],
+        [sys.executable, str(REPO_ROOT / "tools" / "kb-lint.py"), str(OUTPUT)],
         check=True,
     )
 

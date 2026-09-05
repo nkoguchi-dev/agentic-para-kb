@@ -114,6 +114,12 @@ prefix は知識ドメイン、フォルダは PARA 上のライフサイクル�
 
 地図は薄く保ち、詳細はリンク先に置きます。
 
+## ライセンス
+
+MIT License. 詳細は [LICENSE](LICENSE) を参照してください。
+
+テンプレートとして自由にコピー・改変して構いません。コピーや実質的な部分には著作権表示とライセンス文を残してください。
+
 ---
 
 # agentic-para-kb
@@ -231,3 +237,9 @@ This framework intentionally separates:
 - Stable rules from active state.
 
 Keep the map small. Put details behind links.
+
+## License
+
+MIT License. See [LICENSE](LICENSE).
+
+Copy and adapt this template freely. Keep the copyright notice and the license text in copies or substantial portions.

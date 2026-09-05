@@ -50,13 +50,17 @@ TODO 1行では背景、完了条件、依存関係、調査記録が不足す�
 
 ## 会議メモとタスク取り込み
 
-会議メモは input record であり、タスクの正本ではありません。文字起こしや議事録からアクション・決定が出た場合、対象 project / area の文脈を読み込んでいないセッションでは、対象を直接編集しないでください。
+会議メモは input record であり、タスクの正本ではありません。**アクション・決定は、議事録を作ったのと同じセッションで宛先まで書き切ります。** ただし**読まずに書かないこと**——宛先へ書くには、その既存記述・粒度・重複を把握したうえで、適切な場所に適切な粒度で書き込む必要があります。
 
-1. 議事録にはアクション・決定を記録する。
-2. 追跡すべき作業は、会議を所有する project / area の MOC に「反映TODO」として `- [ ]` で置く。
-3. 反映TODOは「Reflect <action/decision> into <target project/area> after reading its current context」のように、対象と前提を明示する。
-4. 後続セッションが対象 project / area を読み込み、適切な場所・粒度で反映する。
+1. 議事録にアクション・決定を記録する。
+2. **宛先ごとに、その project / area の MOC と関連する正典を実際に読む**（ステータスブロック・既存の記述・粒度）。
+3. **既に反映済み・上書きになる・重複になるものは転記せずクローズする。** 残りを適切な粒度で書く。
+4. 議事録に「タスク反映先」節を作り、**何をどこへ書いたか／書かなかった判断**を残す。
 5. 議事録本文では原則 `- [ ]` を使わず、表や番号リストで記録する。例外的に議事録自体をタスクソースにする場合だけ `<!-- kb-tasks:include -->` を使う。
+
+**宛先が多くて 1 セッションで読み切れないときだけ**、残りを「反映TODO」として `- [ ]` に起票し、次セッションへ渡します（例外であって既定ではありません）。
+
+> **なぜ「TODO に留める」をやめたか。** 以前は「対象の文脈を読み込んでいないセッションは直接編集せず、反映TODOを起票するに留める」というルールでした。運用した結果、**TODO を積んでも結果は「別セッションでまとめて反映して」と依頼するだけ**で、宛先を読む作業は同じだけ発生し、間に TODO の管理コストとタスク索引の膨張が挟まるだけでした。**要求すべきなのは「セッションを分けること」ではなく「宛先を読む手順を踏むこと」**です。
 
 ## 完了・非アクティブ化時の蒸留
 
@@ -152,13 +156,17 @@ When a one-line TODO lacks enough background, completion criteria, dependencies,
 
 ## Meeting Notes And Task Intake
 
-Meeting notes are input records, not task sources of truth. When actions or decisions appear in a transcript or meeting note, do not directly edit a target project or area unless the session has loaded and understood that target context.
+Meeting notes are input records, not task sources of truth. **Reflect actions and decisions into their targets in the same session that writes the meeting note.** But do not write blind: reaching the right place at the right granularity requires knowing what the target already says.
 
 1. Record actions and decisions in the meeting note.
-2. Put trackable work in the meeting-owning project or area MOC as an intake TODO using `- [ ]`.
-3. Write intake TODOs as “Reflect <action/decision> into <target project/area> after reading its current context” so the target and prerequisite are explicit.
-4. A later session should read the target project or area and reflect the work at the right place and granularity.
+2. **For each target, actually read that project or area MOC and the canonical pages it points to** (status block, existing wording, granularity).
+3. **Close anything already reflected, superseded, or duplicated instead of copying it.** Write the rest at the right granularity.
+4. Add a "Reflected into" section to the meeting note recording **what went where, and what you decided not to carry over**.
 5. Avoid `- [ ]` checkboxes in meeting notes by default; use tables or numbered lists instead. Use `<!-- kb-tasks:include -->` only when the meeting note itself is intentionally a task source.
+
+**Only when there are too many targets to read in one session**, file the remainder as intake TODOs (`- [ ]`) and hand them to the next session. That is the exception, not the default.
+
+> **Why the intake-TODO-only rule was dropped.** The earlier rule said a session that had not loaded the target context must not edit it directly, and should only file an intake TODO. In practice, filing the TODO just deferred the same work to a later session that still had to read the target, while adding TODO bookkeeping and inflating the task index. **What needs to be required is reading the target, not splitting the session.**
 
 ## Closure And Distillation
 

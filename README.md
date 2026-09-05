@@ -53,12 +53,16 @@ project が完了した、または area が自分・チームの継続責任で
 
 ## 会議メモとタスク取り込み
 
-会議メモは input record であり、タスクの正本ではありません。文字起こしや議事録からアクション・決定が出た場合、対象 project / area の文脈を読み込んでいないセッションでは、対象を直接編集しません。
+会議メモは input record であり、タスクの正本ではありません。**アクション・決定は、議事録を作ったのと同じセッションで宛先まで書き切ります。** ただし読まずに書かないこと。
 
-- 議事録にはアクション・決定を記録する。
-- 追跡すべき作業は、会議を所有する project / area の MOC に「反映TODO」として置く。
-- 後続セッションが対象 project / area を読み込み、適切な場所・粒度で反映する。
+- 議事録にアクション・決定を記録する。
+- **宛先ごとに、その project / area の MOC と関連する正典を実際に読む**（既存の記述・粒度・重複）。
+- **既に反映済み・上書きになる・重複になるものは転記せずクローズする。** 残りを適切な粒度で書く。
+- 議事録に「タスク反映先」節を作り、何をどこへ書いたか／書かなかった判断を残す。
 - 議事録本文では原則 `- [ ]` を使わず、表や番号リストで記録する。
+- **宛先が多くて 1 セッションで読み切れないときだけ**、残りを「反映TODO」として次セッションへ渡す（例外）。
+
+以前は「対象の文脈を読み込んでいないセッションは直接編集せず、反映TODOを起票するに留める」というルールでしたが、**TODO を積んでも宛先を読む作業は同じだけ発生し、TODO の管理コストとタスク索引の膨張が挟まるだけ**でした。要求すべきなのは**セッションを分けることではなく、宛先を読む手順を踏むこと**です。
 
 ## 大規模KB向けの任意パターン
 
@@ -153,12 +157,16 @@ Then update MOC links and run `python3 tools/kb-tasks.py --write` and `python3 t
 
 ## Meeting Notes And Task Intake
 
-Meeting notes are input records, not task sources of truth. When actions or decisions appear in a transcript or meeting note, do not directly edit a target project or area unless the session has loaded and understood that target context.
+Meeting notes are input records, not task sources of truth. **Reflect actions and decisions into their targets in the same session that writes the meeting note** — but do not write blind.
 
 - Record actions and decisions in the meeting note.
-- Put trackable work in the meeting-owning project or area MOC as an intake TODO.
-- A later session should read the target project or area and reflect the work at the right place and granularity.
+- **For each target, actually read that project or area MOC and the canonical pages it points to** (existing wording, granularity, duplication).
+- **Close anything already reflected, superseded, or duplicated instead of copying it.** Write the rest at the right granularity.
+- Add a "Reflected into" section to the meeting note recording what went where, and what you decided not to carry over.
 - Avoid `- [ ]` checkboxes in meeting notes by default; use tables or numbered lists instead.
+- **Only when there are too many targets to read in one session**, hand the remainder to the next session as intake TODOs (the exception, not the default).
+
+The earlier rule required filing intake TODOs instead of editing targets directly. In practice that deferred the same reading work to a later session while adding bookkeeping and inflating the task index. **What needs to be required is reading the target, not splitting the session.**
 
 ## Optional Pattern For Larger Knowledge Bases
 

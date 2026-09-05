@@ -87,6 +87,23 @@ python3 tools/kb-tasks.py --write
 
 検証済みのまとまりになったら、こまめにコミットしてください。未コミットの変更を残して作業を終える場合は、理由と残っている変更を明示してください。
 
+## 作業ツリー
+
+**セッションを並行して走らせるなら、編集は worktree で行い、`main` をチェックアウトしたツリーでは 1 文字も編集しません。**
+
+理由は「`main` のツリーが汚れていると誰もマージできなくなる」ことです。`git merge` は上書き対象のファイルに未コミット変更があると中断するので、**あるセッションが `main` のツリーに書きかけを置いている間、他のセッションは自分の作業を `main` へ入れられません**。この KB の作業は複数の MOC と正典にまたがるので、これは実際に起きます。
+
+1. 作業ごとに `git worktree add .worktrees/<作業名> -b <branch>` で切り、そこで編集・コミットする。
+2. 取り込みは `main` のツリーで `git merge --no-ff <branch>`。
+3. **取り込んだら worktree とブランチを 2 つで 1 組で消す**（`git worktree remove <path>` → `git branch -d <branch>`）。`-d` は取り込み済みのときだけ成功するので、**失敗したら「まだ入っていない」というサイン**です。`-D` で強制しないでください。
+
+- ⛔ **規模で判断しないこと。** 「小さいから直接でいい」が積み上がると必ず汚れます。閾値を置かず「`main` のツリーは誰も編集しない」を不変条件にすると、マージが他人の都合で止まらなくなります。
+- ⚠️ **worktree 内のファイル操作は絶対パスで書いてください。** カレントディレクトリが次のコマンド呼び出しへ持続するかは実行環境によって違い、取り違えると `main` のツリーを編集してしまいます。
+- **`main` のツリーが汚れていたら、他セッションの書きかけの可能性があります。** `git stash` / `git commit` / `git restore` のどれもせず、汚れが消えるのを待つか人間に渡してください。他人の作業を巻き上げたり消したりしないためです。
+- **worktree を消してブランチだけ残すと放置ブランチが溜まります。** `git for-each-ref refs/heads/` は「他セッションが今どのブランチで作業中か」を読むための数少ない信号なので、残骸があると読めなくなります。
+
+セッションを 1 本しか走らせないなら、この節は任意です。ただし**採用したら規模による例外は置かないでください**（上のとおり、例外を置くと必ず崩れます）。
+
 ## 命名
 
 - ファイル名は lowercase kebab-case にする。
@@ -192,6 +209,23 @@ python3 tools/kb-tasks.py --write
 `_core/00-09_index/00.02-tasks.md` is generated. Do not edit it manually.
 
 Commit frequently once a verified change is coherent. If you end work with uncommitted changes, state why and list what remains.
+
+## Working Trees
+
+**If you run sessions concurrently, edit in a worktree and never edit the tree that has `main` checked out.**
+
+The reason is that a dirty `main` tree blocks everyone's merges. `git merge` aborts when a file it would overwrite has uncommitted changes, so **while one session leaves work in progress in the `main` tree, no other session can land its own work**. Work in this KB routinely spans several MOCs and canonical pages, so this happens in practice.
+
+1. Create a worktree per unit of work: `git worktree add .worktrees/<name> -b <branch>`. Edit and commit there.
+2. Land it from the `main` tree with `git merge --no-ff <branch>`.
+3. **Remove the worktree and the branch together** (`git worktree remove <path>`, then `git branch -d <branch>`). `-d` only succeeds when the branch is already merged, so **a failure is the signal that it is not in yet**. Do not force with `-D`.
+
+- ⛔ **Do not decide by size.** "This one is small enough to do directly" accumulates until the tree is dirty. Setting no threshold makes "nobody edits the `main` tree" an invariant, and merges stop depending on someone else's timing.
+- ⚠️ **Use absolute paths for file operations inside a worktree.** Whether the current directory persists across command invocations depends on the runtime, and getting it wrong means editing the `main` tree by accident.
+- **If the `main` tree is dirty, it may be another session's work in progress.** Do not `git stash`, `git commit`, or `git restore` it — wait for it to clear, or hand it to a human. Never sweep up or discard someone else's work.
+- **Removing a worktree while leaving its branch behind accumulates stale branches.** `git for-each-ref refs/heads/` is one of the few signals for "which branch is another session working on right now", and leftovers make it unreadable.
+
+If you only ever run one session, this section is optional. **But once you adopt it, do not add size-based exceptions** — as above, exceptions always erode it.
 
 ## Naming
 

@@ -66,6 +66,8 @@ project が完了した、または area が自分・チームの継続責任で
 
 ## 大規模KB向けの任意パターン
 
+### ドメインprefix付き番地
+
 大規模な業務KBやチームKBでは、JD番号の枯渇を避けるためにドメインprefix付き番地を使ってもよいです。
 
 ```text
@@ -80,6 +82,10 @@ project が完了した、または area が自分・チームの継続責任で
 - `sec.80.00-security-requirements-index.md`
 
 prefix は知識ドメイン、フォルダは PARA 上のライフサイクルを表します。prefix ごとに独立した番号空間を持ち、prefix/category の割当は root MOC の registry で管理します。
+
+### 並行セッションと作業ツリー
+
+複数のエージェントセッションを同時に走らせるなら、編集は git worktree で行い、`main` をチェックアウトしたツリーでは編集しません。`git merge` は上書き対象のファイルに未コミット変更があると中断するため、**`main` のツリーに書きかけがあるあいだ、他のセッションは自分の作業を取り込めなくなります**。手順と落とし穴は `AGENTS.md` の「作業ツリー」節にあります。
 
 ## Quick Start
 
@@ -168,7 +174,9 @@ Meeting notes are input records, not task sources of truth. **Reflect actions an
 
 The earlier rule required filing intake TODOs instead of editing targets directly. In practice that deferred the same reading work to a later session while adding bookkeeping and inflating the task index. **What needs to be required is reading the target, not splitting the session.**
 
-## Optional Pattern For Larger Knowledge Bases
+## Optional Patterns For Larger Knowledge Bases
+
+### Domain-Prefixed Addressing
 
 For larger team or business knowledge bases, use domain-prefixed addresses to avoid exhausting Johnny.Decimal number ranges.
 
@@ -184,6 +192,10 @@ Examples:
 - `sec.80.00-security-requirements-index.md`
 
 The domain prefix represents a knowledge domain. The PARA folder represents lifecycle/state. Each domain prefix has an independent number space. Maintain prefix/category assignments in the root MOC registry.
+
+### Concurrent Sessions And Working Trees
+
+If you run several agent sessions at once, edit in a git worktree and never edit the tree that has `main` checked out. `git merge` aborts when a file it would overwrite has uncommitted changes, so **while the `main` tree holds work in progress, no other session can land its own work**. The procedure and its pitfalls are in the "Working Trees" section of `AGENTS.md`.
 
 ## Quick Start
 
